@@ -21,11 +21,11 @@ Initial configuration options for the user are -
 
 ```javascript
 options = {
-    "standardRecipeVolume" : 60,
+    "standardRecipeVolume" : 100,
     "minimumRecipes" : 3,
     "vgRatio" : 70,
     "pgRatio": 30,
-    "nicotineStrength": 3
+    "nicotineStrength": 5
 }
 ```
 
@@ -89,7 +89,7 @@ mixOptions = {
 
 Lets do the math: 
 
-> 60 _mL_ * 3 = 180 _mL_  
+> 100 _mL_ * 3 = 300 _mL_  
 > **VG + PG + Flavour(s) + Nicotine = 180 _mL_**
 
 | Item | Density (_g/mL_) |
