@@ -17,7 +17,7 @@ Initial configuration options for the user are -
 
 #### EXAMPLE
 
-##### ***config options***
+##### ___config options___
 
 ```javascript
 options = {
@@ -29,7 +29,7 @@ options = {
 }
 ```
 
-##### ***stock options***
+##### ___stock options___
 
 ```javascript
 liquidStock = {
@@ -38,6 +38,8 @@ liquidStock = {
     "nicotine": {
         "strength": 100,
         "volume": 120,
+        "isVg": false,
+        "type": "PG"
     },
     "flavors": [
         {
@@ -56,7 +58,7 @@ liquidStock = {
 }
 ```
 
-##### ***mix options***
+##### ___mix options___
 
 ```javascript
 mixOptions = {
@@ -107,6 +109,7 @@ Lets do the math:
 - PG - 30%
 - Nicotine Strength - 5 _mg/mL_
 - Flavor_1(PG) - 3%
+- Flavor_2(VG) - 2%
 
 
 
@@ -118,14 +121,19 @@ recipe = [
         "weight": 5.17,
     },
     {
-        "element": "TFA Bavarian Cream",
+        "element": "Capella Bavarian Cream",
         "volume": 3.00,
         "weight": 3.15,
     },
     {
+        "element": "TFA Strawberry (Ripe)",
+        "volume": 2.00,
+        "weight": 2.10,
+    },
+    {
         "element": "Vegetable Glycerin",
-        "volume": 69.65,
-        "weight": 87.85,
+        "volume": 67.65,
+        "weight": 85.33,
     },
     {
         "element": "Propylene Glycol",
@@ -141,23 +149,27 @@ recipe = [
 1. PG Ratio = p
 2. VG Ratio = v
 3. Nicotine Strength = s
-4. Flavour (n) Percent = f
+4. PG Flavor Percent = pF
+5. VG Flavor Percent = vF
 6. PG Ratio || VG Ratio ( p || v ) = i
+7. PG Flavor Percent || VG Flavor Percent ( pF || vF ) = j
 
 ##### Expressions for VG/PG Volume (in _mL_)
 - _expr_1 = ( i * n )/1000_
 - _expr_2 = n - ( n/10 )_
-- _expr_3 = v - ( expr_1 + f + expr_2 )_
+- _expr_3 = j = j_1 + j_2 + j_3 + ... + j_n_
+- _expr_5 = i - ( expr_1 + expr_2 + expr_3 )_
 
 ##### Expressions for Nicotine & Flavor (in _mL_)
-- _expr_4 = n_
-- _expr_5 = f_
+- _expr_5 = n_
+- _expr_6 = f_
 
 ##### Rules
 - _p + v = 100_
-- _f = f_1 + f_2 + f_3 + ... f_n where [f_1 , f_2 , f_3 , ...f_n] are different flavors_
-- if flavor is in __VG__, then _f = 0_ for _expr_3_ when _i = p_
-- if flavor is in __PG__, then _f = 0_ for _expr_3_ when _i = v_
+- _j = j_1 + j_2 + j_3 + ... + j_n where [j_1 , j_2 , j_3 , ... j_n] are different flavors_
+- if there are no flavors in __VG__, then _j = 0_ for _expr_3_ when _i is p_
+- if there are no flavors in __PG__, then _j = 0_ for _expr_3_ when _i is v_
+- if there are both __VG__ & __PG__ flavors, then they both add up to their individual expressions to then calculate the final resulting volume for their respective bases.
 - if nicotine is in __VG__, then _expr_2 = 0_ for _expr_3_ when _i = p_
 - if nicotine is in __PG__, then _expr_2 = 0_ for _expr_3_ when _i = v_
 
@@ -167,7 +179,7 @@ _note: everytime a recipe is created, stock will go down_
 
 ```javascript
 newLiquidStock = {
-    "vg": 430.35,
+    "vg": 432.35,
     "pg": 477.65,
     "nicotine": {
         "strength": 100,
@@ -189,4 +201,5 @@ newLiquidStock = {
     ],
 }
 ```
+
 
