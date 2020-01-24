@@ -4,7 +4,9 @@
   "description": "It alerts when you are running out of stock to make your e-juice recipes",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --mode development --open --hot",
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,19 @@
   "bugs": {
     "url": "https://github.com/bitsatebyte/ejuice_stock_keeper/issues"
   },
-  "homepage": "https://github.com/bitsatebyte/ejuice_stock_keeper#readme"
+  "homepage": "https://github.com/bitsatebyte/ejuice_stock_keeper#readme",
+  "dependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@babel/preset-react": "^7.8.3",
+    "babel-loader": "^8.0.6",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1"
+  }
 }
