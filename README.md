@@ -1,6 +1,6 @@
 # E-juice Stock keeper
 
-## Description
+### **Description**
 
 This is an e-juice stock keeping app. It alerts the user whenever he's running out of supplies let's say to create at least one recipe from his saved cookbooks.
 
@@ -56,7 +56,7 @@ liquidStock = {
 }
 ```
 
-##### ***stock options***
+##### ***mix options***
 
 ```javascript
 mixOptions = {
@@ -100,18 +100,15 @@ Lets do the math:
 | Flavor _(PG)_ | 1.05 |
 | Flavor _(VG)_ | 1.16 |
 
-> Volume of VG Should be multiplied with 1.26 to get weight  
-> Volume of PG & Nicotine(PG) should be multiplied with 1.03 to get weight  
-> Volume of Flavors(PG) should be multiplied with 1.05 to get weight    
-> Volume of Flavors(VG) should be multiplied with 1.16 to get weight
-
-> Let's calculate for each vial(60 _mL_)
+> Let's calculate for each vial (100 _mL_)
 
 ### Juice Properties
 - VG - 70%
 - PG - 30%
-- Nicotine Strength - 3 _mg/mL_
+- Nicotine Strength - 5 _mg/mL_
 - Flavor_1(PG) - 3%
+
+
 
 ```javascript
 recipe = [
@@ -138,6 +135,58 @@ recipe = [
 ]
 ```
 
+### __Target recipe volume calculation (Formulae)__
 
+##### Variables
+1. PG Ratio = p
+2. VG Ratio = v
+3. Nicotine Strength = s
+4. Flavour (n) Percent = f
+6. PG Ratio || VG Ratio ( p || v ) = i
 
-  
+##### Expressions for VG/PG Volume (in _mL_)
+- _expr_1 = ( i * n )/1000_
+- _expr_2 = n - ( n/10 )_
+- _expr_3 = v - ( expr_1 + f + expr_2 )_
+
+##### Expressions for Nicotine & Flavor (in _mL_)
+- _expr_4 = n_
+- _expr_5 = f_
+
+##### Rules
+- _p + v = 100_
+- _f = f_1 + f_2 + f_3 + ... f_n where [f_1 , f_2 , f_3 , ...f_n] are different flavors_
+- if flavor is in __VG__, then _f = 0_ for _expr_3_ when _i = p_
+- if flavor is in __PG__, then _f = 0_ for _expr_3_ when _i = v_
+- if nicotine is in __VG__, then _expr_2 = 0_ for _expr_3_ when _i = p_
+- if nicotine is in __PG__, then _expr_2 = 0_ for _expr_3_ when _i = v_
+
+## Stock Calculation Formulae
+
+_note: everytime a recipe is created, stock will go down_
+
+```javascript
+newLiquidStock = {
+    "vg": 430.35,
+    "pg": 477.65,
+    "nicotine": {
+        "strength": 100,
+        "volume": 115,
+    },
+    "flavors": [
+        {
+            "name:" "TFA Strawberry (Ripe)",
+            "isVg": true,
+            "type": "VG",
+            "volume": 7,
+        },
+        {
+            "name": "Capella Bavarian Cream",
+            "isVg": false,
+            "type": "PG",
+            "volume": 10,
+        }
+    ],
+}
+```
+
