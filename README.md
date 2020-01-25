@@ -95,10 +95,10 @@ Lets do the math:
 | Item | Density (_g/mL_) |
 | ---- | -------------- |
 | Pure Nicotine | 1.0 |
-| Nicotine _(PG)_| 1.03 |
+| Nicotine _(PG)_| 1.036 |
 | Nicotine _(VG)_| 1.24 |
-| VG | 1.26 |
-| PG | 1.03 |
+| VG | 1.261 |
+| PG | 1.036 |
 | Flavor _(PG)_ | 1.05 |
 | Flavor _(VG)_ | 1.16 |
 
